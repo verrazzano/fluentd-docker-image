@@ -1,7 +1,7 @@
 # Copyright (C) 2020, Oracle and/or its affiliates.
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 
-FROM oraclelinux:7-slim
+FROM container-registry.oracle.com/os/oraclelinux:7-slim 
 LABEL maintainer ="Verrazzano developers <verrazzano_ww@oracle.com>"
 LABEL Description="Fluentd docker image for Oracle Linux 7" Vendor="Oracle" Version="1.10.4"
 ENV TINI_VERSION=0.18.0
