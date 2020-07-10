@@ -12,6 +12,7 @@ ENV PATH "$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
 # Install ruby-2.6.6
 RUN set -eux; \
     yum -y update; \
+    yum-config-manager --save --setopt=ol7_ociyum_config.skip_if_unavailable=true ; \
     yum -y install \
         wget \
         which \
@@ -61,6 +62,7 @@ RUN set -eux; \
     ./configure && make ; \
     mv lib/libjemalloc.so.2 /usr/lib ; \
     yum clean all ; \
+    rm -rf /var/cache/yum ; \
     rm -rf /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem ; \
     groupadd -r fluent && useradd -r -g fluent fluent ; \
     # for log storage (maybe shared with host)
