@@ -22,18 +22,22 @@ collection and consumption for a better use and understanding of data.
 
 These tags have image version postfix. This updates many places so we need feedback for improve/fix the images.
 
-Current images use fluentd v1 serise.
+Current images use fluentd v1 series.
 
-- `v1.11.0-1.0`, `v1.11-1`, `edge`
-  [(v1.10/alpine/Dockerfile)][fluentd-1-alpine]
-- `v1.11.0-debian-1.0`, `v1.11-debian-1`, `edge-debian`
-  [(v1.10/debian/Dockerfile)][fluentd-1-debian]
-- `v1.11.0-debian-arm64-1.0`, `v1.11-debian-arm64-1`, `edge-debian-arm64`
-  [(v1.10/arm64/debian/Dockerfile)][fluentd-1-debian-arm64]
-- `v1.11.0-debian-armhf-1.0`, `v1.11-debian-armhf-1`, `edge-debian-armhf`
-  [(v1.10/armhf/debian/Dockerfile)][fluentd-1-debian-armhf]
-- `v1.11.0-windows-1.0`, `v1.11-windows-1`
-  [(v1.10/windows/Dockerfile)][fluentd-1-windows]
+- `v1.12.2-1.0`, `v1.12-1`, `edge`
+  [(v1.12/alpine/Dockerfile)][fluentd-1-alpine]
+- `v1.12.2-debian-1.0`, `v1.12-debian-1`, `edge-debian`
+  [(v1.12/debian/Dockerfile)][fluentd-1-debian]
+- `v1.12.2-debian-arm64-1.0`, `v1.12-debian-arm64-1`, `edge-debian-arm64`
+  [(v1.12/arm64/debian/Dockerfile)][fluentd-1-debian-arm64]
+- `v1.12.2-debian-armhf-1.0`, `v1.12-debian-armhf-1`, `edge-debian-armhf`
+  [(v1.12/armhf/debian/Dockerfile)][fluentd-1-debian-armhf]
+- `v1.12.2-windows-ltsc2019-1.0`, `v1.12-windows-ltsc2019-1`
+  [(v1.12/windows-ltsc2019/Dockerfile)][fluentd-1-ltsc2019-windows]
+- `v1.12.2-windows-2004-1.0`, `v1.12-windows-2004-1`
+  [(v1.12/windows-2004/Dockerfile)][fluentd-1-2004-windows]
+- `v1.12.2-windows-20H2-1.0`, `v1.12-windows-20H2-1`
+  [(v1.12/windows-20H2/Dockerfile)][fluentd-1-20H2-windows]
 
 ### Old v1.4 images
 
@@ -163,7 +167,7 @@ Default configurations are to:
 
 For example, to provide a bespoke config and make `fluentd` verbose, then:
 
-`docker run -ti --rm -v /path/to/dir:/fluentd/etc fluentd -c /fluentd/etc/<conf> -v`
+`docker run -ti --rm -v /path/to/dir:/fluentd/etc fluent/fluentd -c /fluentd/etc/<conf> -v`
 
 The first `-v` tells Docker to share '/path/to/dir' as a volume and mount it at /fluentd/etc
 The `-c` after the container name (fluentd) tells `fluentd` where to find the config file
@@ -197,6 +201,7 @@ cd custom-fluentd
 curl https://raw.githubusercontent.com/fluent/fluentd-docker-image/master/VERSION/OS/fluent.conf > fluent.conf
 
 curl https://raw.githubusercontent.com/fluent/fluentd-docker-image/master/VERSION/OS/entrypoint.sh > entrypoint.sh
+chmod +x entrypoint.sh
 
 # Create plugins directory. plugins scripts put here will be copied to the new image.
 mkdir plugins
@@ -219,7 +224,7 @@ To add plugins, edit `Dockerfile` as following:
 #### Alpine version
 
 ```Dockerfile
-FROM fluent/fluentd:v1.11-1
+FROM fluent/fluentd:v1.12-1
 
 # Use root account to use apk
 USER root
@@ -242,7 +247,7 @@ USER fluent
 #### Debian version
 
 ```Dockerfile
-FROM fluent/fluentd:v1.11-debian-1
+FROM fluent/fluentd:v1.12-debian-1
 
 # Use root account to use apt
 USER root
@@ -385,8 +390,10 @@ through a [GitHub issue](https://github.com/fluent/fluentd-docker-image/issues).
 [fluentd-1-4-debian]: https://github.com/fluent/fluentd-docker-image/blob/master/v1.4/debian/Dockerfile
 [fluentd-1-4-debian-onbuild]: https://github.com/fluent/fluentd-docker-image/blob/master/v1.4/debian-onbuild/Dockerfile
 [fluentd-1-4-windows]: https://github.com/fluent/fluentd-docker-image/blob/master/v1.4/windows/Dockerfile
-[fluentd-1-alpine]: https://github.com/fluent/fluentd-docker-image/blob/master/v1.10/alpine/Dockerfile
-[fluentd-1-debian]: https://github.com/fluent/fluentd-docker-image/blob/master/v1.10/debian/Dockerfile
-[fluentd-1-debian-arm64]: https://github.com/fluent/fluentd-docker-image/blob/master/v1.10/arm64/debian/Dockerfile
-[fluentd-1-debian-armhf]: https://github.com/fluent/fluentd-docker-image/blob/master/v1.10/armhf/debian/Dockerfile
-[fluentd-1-windows]: https://github.com/fluent/fluentd-docker-image/blob/master/v1.10/windows/Dockerfile
+[fluentd-1-alpine]: https://github.com/fluent/fluentd-docker-image/blob/master/v1.12/alpine/Dockerfile
+[fluentd-1-debian]: https://github.com/fluent/fluentd-docker-image/blob/master/v1.12/debian/Dockerfile
+[fluentd-1-debian-arm64]: https://github.com/fluent/fluentd-docker-image/blob/master/v1.12/arm64/debian/Dockerfile
+[fluentd-1-debian-armhf]: https://github.com/fluent/fluentd-docker-image/blob/master/v1.12/armhf/debian/Dockerfile
+[fluentd-1-ltsc2019-windows]: https://github.com/fluent/fluentd-docker-image/blob/master/v1.12/windows-ltsc2019/Dockerfile
+[fluentd-1-2004-windows]: https://github.com/fluent/fluentd-docker-image/blob/master/v1.12/windows-2004/Dockerfile
+[fluentd-1-20H2-windows]: https://github.com/fluent/fluentd-docker-image/blob/master/v1.12/windows-20H2/Dockerfile
