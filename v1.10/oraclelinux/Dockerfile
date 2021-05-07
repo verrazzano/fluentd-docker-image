@@ -35,7 +35,7 @@ RUN set -eux; \
         curl \
         sqlite-devel \
     ; \
-    curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer | bash ; \
+    curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash ; \
     echo "$PATH" ; \
     rbenv install 2.6.6 ; \
     rbenv global 2.6.6 ; \

@@ -1,9 +1,9 @@
-# Copyright (C) 2020, Oracle and/or its affiliates.
+# Copyright (C) 2021, Oracle and/or its affiliates.
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 
 FROM container-registry.oracle.com/os/oraclelinux:7-slim@sha256:fcc6f54bb01fc83319990bf5fa1b79f1dec93cbb87db3c5a8884a5a44148e7bb
 LABEL maintainer ="Verrazzano developers <verrazzano_ww@oracle.com>"
-LABEL Description="Fluentd docker image for Oracle Linux 7" Vendor="Oracle" Version="1.10.4"
+LABEL Description="Fluentd docker image for Oracle Linux 7" Vendor="Oracle" Version="1.12.3"
 ENV TINI_VERSION=0.18.0
 ENV RBENV_ROOT /root/.rbenv
 ENV PATH "$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
@@ -35,7 +35,7 @@ RUN set -eux; \
         curl \
         sqlite-devel \
     ; \
-    curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer | bash ; \
+    curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash ; \
     echo "$PATH" ; \
     rbenv install 2.6.6 ; \
     rbenv global 2.6.6 ; \
@@ -43,11 +43,11 @@ RUN set -eux; \
     gem -v ;  \
     bundle -v ; \
     echo 'gem: --no-document' >> /etc/gemrc ; \
-    gem install oj -v 3.8.1 ; \
-    gem install json -v 2.3.0 ; \
-    gem install async-http -v 0.50.7 ; \
+    gem install oj -v 3.10.18 ; \
+    gem install json -v 2.4.1 ; \
+    gem install async-http -v 0.54.0 ; \
     gem install ext_monitor -v 0.1.2 ; \
-    gem install fluentd -v 1.10.4 ; \
+    gem install fluentd -v 1.12.3 ; \
     dpkgArch="amd64" ; \
     wget -O /usr/local/bin/tini "https://github.com/krallin/tini/releases/download/v$TINI_VERSION/tini-$dpkgArch" ; \
     wget -O /usr/local/bin/tini.asc "https://github.com/krallin/tini/releases/download/v$TINI_VERSION/tini-$dpkgArch.asc" ; \
@@ -71,8 +71,8 @@ RUN set -eux; \
     mkdir -p /fluentd/etc /fluentd/plugins ; \
     chown -R fluent /fluentd && chgrp -R fluent /fluentd
 
-COPY v1.10/oraclelinux/fluent.conf /fluentd/etc/
-COPY v1.10/oraclelinux/entrypoint.sh /bin/
+COPY v1.12/oraclelinux/fluent.conf /fluentd/etc/
+COPY v1.12/oraclelinux/entrypoint.sh /bin/
 
 #Copy license and README to image
 COPY LICENSE README.md THIRD_PARTY_LICENSES.txt /license/
